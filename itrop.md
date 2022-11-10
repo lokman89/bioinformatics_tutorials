@@ -56,7 +56,7 @@ The list of nodes in the cluster:
 *gpu* partition: need of analyses on GPU cores
 
 
-### Choose **node5** (*highmem* partition):
+#### Choose **node5** (*highmem* partition):
 `srun -p highmemplus --nodelist=node5 --pty bash -i`
 
 ## Data location
