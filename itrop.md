@@ -1,4 +1,4 @@
-#i-Trop cluster
+# i-Trop cluster
 
 ## Architecture of the i-Trop cluster
 
@@ -6,13 +6,13 @@ The IRD Bioinformatic Cluster is composed of a pool of machines reachable throug
 
 The cluster is composed of:
 
-    - 1 master
-    - 3 nas servers for a 127To data storage
-    - 32 nodes servers : 8 nodes with 12 cores, 2 nodes with 16 cores, 4 nodes with 20 cores, 11 with 24 cores, 1 with 40 cores with RAM from 48Go to 1To and a GPU serveur with 8 RTX 2080 graphical cards.
+- 1 master 
+- 3 nas servers for a 127To data storage
+- 32 nodes servers : 8 nodes with 12 cores, 2 nodes with 16 cores, 4 nodes with 20 cores, 11 with 24 cores, 1 with 40 cores with RAM from 48Go to 1To and a GPU serveur with 8 RTX 2080 graphical cards.
 
 Here is the architecture:
 
-![This is an image.](https://github.com/lokman89/bioinformatics_tutorials/schema_cluster_150221.png)
+![This is an image.](https://github.com/lokman89/bioinformatics_tutorials/blob/temp/schema_cluster_150221.png)
 
 ## Connect to the cluster via *ssh*
 
@@ -55,7 +55,8 @@ The list of nodes in the cluster:
 
 *gpu* partition: need of analyses on GPU cores
 
-choose **node5** (*highmem* partition):
+
+### Choose **node5** (*highmem* partition):
 `srun -p highmemplus --nodelist=node5 --pty bash -i`
 
 ## Data location
