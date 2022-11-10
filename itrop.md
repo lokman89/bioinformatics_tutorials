@@ -29,6 +29,13 @@ Your password has to be changed at your first connection.
 
 “Mot de passe UNIX (actuel)”: you are asked to type the password provided in the account creation email.
 
+#### Connect to a node in interactive mode and launch commands:
+
+To connect to a node in interactive mode for X minutes , use the following command :
+
+`srun -p short --time=X:00 --pty bash -i`
+
+Then you can launch on this node without using the srun prefix srun
 Then type your new password twice.
 
 The session will be automatically closed.
@@ -109,3 +116,66 @@ For example : for the version 1.7 of the bioinformatic software samtools:
 
 `module unload`
 
+## Launch a job
+
+A job can be launched interactively using *srun* or via a script using *sbatch*
+
+### Lauch an interactive job
+
+#### Connect to a node in interactive mode and launch commands:
+
+To connect to a node in interactive mode for X minutes , use the following command :
+
+`srun -p short --time=X:00 --pty bash -i`
+
+Then you can launch on this node without using the srun prefix srun
+
+#### Launching commands from the master
+
+The following command allocate computing resources ( nodes, memory, cores) and immediately launch the command on each allocate resource.
+
+`srun + command`
+
+Example:
+```
+module load bioinfo/FastQC/0.11.9
+srun -p highmemplus --nodelist=node5 fastqc -t 2 agropolis_2022/data/untrimmed_lr_fastq/all_guppy.fastq
+```
+
+### Launching jobs via a script
+
+The batch mode allows to launch an analysis by following the steps described into a script
+
+Slurm allows to use different types of scripts such as bash, perl or python.
+
+Slurm allocates the desired computing resources and launch analyses on these resources in background.
+
+To be interpreted by Slurm, the script should contain a specific header with all the keyword **#SBATCH** to precise the Slurm options. .
+
+Slurm script example:
+```
+#!/bin/bash
+## Define job's name
+#SBATCH --job-name=flye
+## Define the number of tasks
+#SBATCH --ntasks=1
+## Choose the node
+#SBATCH --nodelist=node11
+## Choose partition
+#SBATCH --partition=long
+#Define the timelimit
+#SBATCH --time=400:00:00
+## Define the number of cpus
+#SBATCH --cpus-per-task=8
+## Define the amount of ram per cpu
+#SBATCH --mem-per-cpu=6000
+```
+
+To launch an analysis use the following command:
+
+`sbatch script.sh`
+
+with `script.sh` the name of the script to use.
+
+#### Check job status
+sacct -S 2020-11-2 -u galal --format=jobid,jobname,user,submit,start,end,state,NNodes,CPUTimeRAW,comment,Timelimit,TotalCPU,CPUTime,MaxDiskWrite,NodeList
